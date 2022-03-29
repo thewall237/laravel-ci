@@ -5,7 +5,9 @@ jobs:
       - image: circleci/php:7.3-node-browsers
     steps:
       - checkout
-      - run: sudo composer self-update --1
+      - run:
+          working_directory: laravel-ci
+          command: sudo composer self-update --1
       - run:
           working_directory: laravel-ci
           command: composer install -n --prefer-dist
