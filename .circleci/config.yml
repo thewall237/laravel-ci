@@ -17,9 +17,19 @@ jobs:
           key: composer-v1-{{ checksum "laravel-ci/composer.lock" }}
           paths:
             - laravel-ci/vendor
+      - restore_cache:
+          key: npm-v1-{{ checksum "laravel-ci/package-lock.json" }}
       - run:
+          name: npm ci
           working_directory: laravel-ci
-          command: npm ci
+          command: |
+            if [ ! -d node_modules ]; then
+              npm ci
+            fi 
+      - save_cache:
+          key: npm-v1-{{ checksum "laravel-ci/package-lock.json" }}
+          paths:
+            - laravel-ci/node_modules
       - run:
           working_directory: laravel-ci
           command: npm run dev
