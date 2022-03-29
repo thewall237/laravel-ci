@@ -9,14 +9,14 @@ jobs:
           working_directory: laravel-ci
           command: sudo composer self-update --1
       - restore_cache:
-          key: composer-v1-{{ checksum "composer.lock" }}
+          key: composer-v1-{{ checksum "laravel-ci/composer.lock" }}
       - run:
           working_directory: laravel-ci
           command: composer install -n --prefer-dist
       - save_cache:
-          key: composer-v1-{{ checksum "composer.lock" }}
+          key: composer-v1-{{ checksum "laravel-ci/composer.lock" }}
           paths:
-            - vendor
+            - laravel-ci/vendor
       - run:
           working_directory: laravel-ci
           command: npm ci
