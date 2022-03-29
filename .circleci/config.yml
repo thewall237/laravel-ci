@@ -6,9 +6,16 @@ jobs:
     steps:
       - checkout
       - run: sudo composer self-update --1
-      - run: composer install -n --prefer-dist --cwd ./laravel-ci
-      - run: npm ci --cwd ./laravel-ci
-      - run: npm run dev --cwd ./laravel-ci
       - run:
+          working_directory: laravel-ci
+          command: composer install -n --prefer-dist
+      - run:
+          working_directory: laravel-ci
+          command: npm ci
+      - run:
+          working_directory: laravel-ci
+          command: npm run dev
+      - run:
+          working_directory: laravel-ci
           name: php test
-          command: vendor/bin/phpunit --cwd ./laravel-ci
+          command: vendor/bin/phpunit
