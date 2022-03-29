@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.4-node-browsers
-      - image: circleci/mysql:8.0
+      - image: circleci/mysql:8.0.27
         environment:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: larasns
